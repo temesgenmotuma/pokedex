@@ -18,65 +18,112 @@ namespace PokemonApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetPokemon()
         {
-            var pokemons = await _pokemonService.GetAllPokemons();
-            if (pokemons.Count == 0)
+            try
             {
-                return NotFound("No Pokemons found.");
+                var pokemons = await _pokemonService.GetAllPokemons();
+                if (pokemons.Count == 0)
+                {
+                    return NotFound("No Pokemons found.");
+                }
+                return Ok(pokemons);
             }
-            return Ok(pokemons);
+            catch (Exception e)
+            {
+                return StatusCode(500, $"An error occurred: {e.Message}");
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPokemonById(int id)
         {
-            var pokemon = await _pokemonService.GetPokemonById(id);
-            if (pokemon == null)
+            try
             {
-                return NotFound($"Pokemon with ID {id} not found.");
+                var pokemon = await _pokemonService.GetPokemonById(id);
+                if (pokemon == null)
+                {
+                    return NotFound($"Pokemon with ID {id} not found.");
+                }
+                return Ok(pokemon);
             }
-            return Ok(pokemon);
+            catch (Exception e)
+            {
+                return StatusCode(500, $"An error occurred: {e.Message}");
+            }
+
         }
 
         [HttpGet("type/{type}")]
         public async Task<IActionResult> GetPokemonByType(string type)
         {
-            var pokemons = await _pokemonService.GetPokemonByTypeAsync(type);
-            if (pokemons == null || pokemons.Count == 0)
+            try
             {
-                return NotFound(new { Message = $"No Pokémon found with type '{type}'." });
+                var pokemons = await _pokemonService.GetPokemonByTypeAsync(type);
+                if (pokemons == null || pokemons.Count == 0)
+                {
+                    return NotFound(new { Message = $"No Pokémon found with type '{type}'." });
+                }
+
+                return Ok(pokemons);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, $"An error occurred: {e.Message}");
             }
 
-            return Ok(pokemons);
         }
 
 
         [HttpPost]
         public async Task<IActionResult> AddPokemon([FromBody] Pokemon pokemon)
         {
-            if (pokemon == null)
+            try
             {
-                return BadRequest("Pokemon data is null.");
+                if (pokemon == null)
+                {
+                    return BadRequest("Pokemon data is null.");
+                }
+                await _pokemonService.AddPokemon(pokemon);
+                return CreatedAtAction(nameof(GetPokemonById), new { id = pokemon.Id }, pokemon);
             }
-            await _pokemonService.AddPokemon(pokemon);
-            return CreatedAtAction(nameof(GetPokemonById), new { id = pokemon.Id }, pokemon);
+            catch (Exception e)
+            {
+                return StatusCode(500, $"An error occurred: {e.Message}");
+
+            }
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePokemon(int id, [FromBody] UpdatePokemonRequest request)
         {
-            if (request.level < 1)
+            try
             {
-                return BadRequest("Level must be a positive number.");
+
+                if (request.level < 1)
+                {
+                    return BadRequest("Level must be a positive number.");
+                }
+                await _pokemonService.UpdatePokemon(id, request);
+                return Ok();
+
             }
-            await _pokemonService.UpdatePokemon(id, request);
-            return Ok();
+            catch (Exception e)
+            {
+                return StatusCode(500, $"An error occurred: {e.Message}");
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePokemon(int id)
         {
-            await _pokemonService.DeletePokemon(id);
-            return NoContent();
+            try
+            {
+                await _pokemonService.DeletePokemon(id);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, $"An error occurred: {e.Message}");
+            }
         }
     }
 }
