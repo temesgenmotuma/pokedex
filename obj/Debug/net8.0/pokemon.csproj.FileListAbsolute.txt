@@ -31,3 +31,9 @@ E:\school\New folder\year 4\sem 1\Event driven\lab\webapi\pokemon\obj\Debug\net8
 E:\school\New folder\year 4\sem 1\Event driven\lab\webapi\pokemon\obj\Debug\net8.0\pokemon.pdb
 E:\school\New folder\year 4\sem 1\Event driven\lab\webapi\pokemon\obj\Debug\net8.0\pokemon.genruntimeconfig.cache
 E:\school\New folder\year 4\sem 1\Event driven\lab\webapi\pokemon\obj\Debug\net8.0\ref\pokemon.dll
+E:\school\New folder\year 4\sem 1\Event driven\lab\webapi\pokemon\bin\Debug\net8.0\DnsClient.dll
+E:\school\New folder\year 4\sem 1\Event driven\lab\webapi\pokemon\bin\Debug\net8.0\MongoDB.Bson.dll
+E:\school\New folder\year 4\sem 1\Event driven\lab\webapi\pokemon\bin\Debug\net8.0\MongoDB.Driver.dll
+E:\school\New folder\year 4\sem 1\Event driven\lab\webapi\pokemon\bin\Debug\net8.0\SharpCompress.dll
+E:\school\New folder\year 4\sem 1\Event driven\lab\webapi\pokemon\bin\Debug\net8.0\Snappier.dll
+E:\school\New folder\year 4\sem 1\Event driven\lab\webapi\pokemon\bin\Debug\net8.0\ZstdSharp.dll

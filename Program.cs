@@ -1,10 +1,18 @@
+using PokemonApi.Services;
+using PokemonApi.Data;
+
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<IPokemonService, PokemonService>();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<MongoDbContext>();
+
 
 var app = builder.Build();
 
